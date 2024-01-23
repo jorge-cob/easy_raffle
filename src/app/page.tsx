@@ -1,70 +1,43 @@
 'use client'
 
 import ImagePreview from "@/components/ImagePreview";
-import Image from "next/image";
+import '@mantine/core/styles.css';
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+
 import { useState, useEffect } from "react";
 
 export default function Home() {
   
   const [raffleNumber, setRaffleNumber] = useState<number>(0);
 	const [paddedRaffleNumber, setPaddedRaffleNumber] = useState<string>("0000");
-	const onChangeHandler = event => {
-		event.preventDefault()
-		console.log('kek');
-		setRaffleNumber(event.target.value);
-	 };
-
+  const [previewImage, setPreviewImage] = useState<string>("");
+  
 	 useEffect(() => {
 		setPaddedRaffleNumber(raffleNumber.toString().padStart(4, '0'))
 	 }, [raffleNumber])
-	const [previewImage, setPreviewImage] = useState<string>("");
     const selectImage = (event) => {
+      console.log(event.target);
         const selectedFiles = event.target.files as FileList;
         setPreviewImage(URL.createObjectURL(selectedFiles?.[0]));
 	};
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-      <div style={{
-        flexDirection: 'row',
-        display: 'flex'
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label>
-            <input type="file" accept="image/*" onChange={selectImage} />
-          </label>
-          <input
-            type="text"
-            name="raffleNumber"
-            onChange={onChangeHandler}
-            value={raffleNumber}
-          />
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Button asChild className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+            <Label htmlFor="picture">Subir imagen</Label>
+          </Button>
+          <Input 
+            style={{display: "none"}}
+            id="picture" 
+            type="file" 
+            accept="image/*" 
+            onChange={selectImage} 
+            className="file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:border file:border-solid file:border-blue-700 file:rounded-md border-blue-600"/>
         </div>	
 			  <ImagePreview paddedRaffleNumber={paddedRaffleNumber} previewImage={previewImage} />
-      </div>
+     
     </main>
   );
 }
