@@ -2,19 +2,21 @@ import Image from "next/image";
 
 const ImagePreview = ({ previewImage, paddedRaffleNumber }: { previewImage: string, paddedRaffleNumber: string }) => {
     return (
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <div className="relative mix-blend-lighten w-[120vh] h-[]">
             {previewImage && (
-                <div>
+                <>
                     <Image 
                         src={previewImage} 
                         alt="" 
                         width={0}
                         height={0}
                         sizes="100vw"
-                        style={{ width: '100%', height: 'auto' }}
+                        className="absolute h-[] w-full object-cover object-right "
+
                     />
-                    <div>{paddedRaffleNumber}</div>
-                </div>
+                    <div className="absolute h-[20vh] w-[30vh] object-cover object-right mx-44 mt-44 sm:mx-72 sm:mt-72" >{paddedRaffleNumber}</div>
+                  
+                </>
             )}
         </div>
     );
