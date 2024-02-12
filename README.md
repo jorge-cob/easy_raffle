@@ -1,3 +1,6 @@
+The object of this project is to create a simple app that allows any gorup or particular to generate numbered tickets for they self hosted raffles and track down the sellers and the buyers.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
